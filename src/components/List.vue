@@ -1,6 +1,6 @@
 <template>
   <div class="product-list">
-    <Product v-for="product in products" :key="product.id" :product="product" />
+    <Product v-for="product in products" :currency="currency" :key="product.id" :product="product" />
     <!-- :style="{ width: cardsWidth + '%' }" -->
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ products: 'getProducts' }),
+    ...mapGetters({ products: 'getProducts', currency: 'currency'}),
     // cardsWidth() {
     //   let width = this.windowWidth
     //   let count = 1
