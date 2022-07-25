@@ -1,88 +1,76 @@
 <template>
   <div class="product-list">
-    <div class="card" v-for="product in products" :style="{width: cardsWidth + '%'}">
-      <p class="card-title">{{ product.title }}</p>
-      <img class="card-image" :src="product.image" alt="">
-      <p class="card-price">Цена: {{ product.price }} {{ currency }}</p>
-
-      <div>
-        <input type="number" ref="amount" :id="product.id">
-        <span>кг</span>
-      </div>
-
-      <button @click="addToCart(product)"> В корзину </button>
-    </div>
+   <Product
+      v-for="product in productsList"
+      :key="product.id"
+      :currency="currency"
+      :product="product"
+      :style="{ width: cardsWidth + '%' }"
+    />
   </div>
 </template>
 
 <script>
+import Product from './Product.vue'
+
 export default {
-  props: {
-    currency: String,
-  },
-  data() {
-    return {
-      products: [],
-    };
-  },
-  computed: {
-    cardsWidth() {
-      let width = window.innerWidth;
-      let count = 1;
-      if (width > '840px') {
-        count = 3;
-      } else if ((width > '420px' && width < '840px')) {
-        count = 2;
-      }
-
-      return 100 / count;
+  name: 'List',
+    props: {
+      currency: String,
     },
-  },
-  methods: {
-    startPricesMonitoring() {
-      setInterval(this.getList, 1000);
-    },
-    async getList() {
-      let data = await this.$store.dispatch('getProductsList');
-
-      this.products = data;
-    },
-    addToCart(product) {
-      let amount = this.$refs.amount.find((input) => input.id === product.id).value;
-
-      let data = {
-        amount,
-        price: product.price,
-        title: product.title,
+    data() {
+      return {
+          interval: null,
+          windowWidth: 0,
       };
-      this.$parent.cart.push(data);
     },
-  },
-  created() {
-    this.startPricesMonitoring();
-  },
+    computed: {
+      productsList() {
+          return this.$store.getters.getProducts;
+      },
+      cardsWidth() {
+        let width = this.windowWidth;
+        let count = 1;
+        if (width > 840) {
+            count = 3;
+        }
+        else if ((width > 420 && width < 840)) {
+            count = 2;
+        }
+        return 100 / count;
+      },
+    },
+    methods: {
+      startPricesMonitoring() {
+        this.interval = setInterval(this.getList, 2000);
+      },
+      async getList() {
+        await this.$store.dispatch("loadProducts");
+      },
+      onWindowResize(event) {
+        this.windowWidth = window.innerWidth;
+      }
+    },
+    created() {
+      this.startPricesMonitoring();
+    },
+    mounted() {
+      this.onWindowResize();
+      window.addEventListener("resize", this.onWindowResize);
+    },
+    beforeDestroy() {
+      clearInterval(this.interval);
+      window.removeEventListener("resize", this.onWindowResize);
+    },
+    components: { Product }
 };
 </script>
 
-<style>
+<style scoped>
   .product-list {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+
     padding: 10px;
   }
-
-  .card {
-    display: inline-block;
-    width: 100%;
-    border: 1px solid #908888;
-    border-radius: 5px;
-    text-align: center;
-    padding: 10px;
-  }
-  .card-image {
-    width: 100%;
-  }
-  button {
-    padding: 5px;
-    margin: 5px;
-  }
-
 </style>

@@ -1,18 +1,13 @@
-import api from '../../api/products.js';
-import Vue from 'vue';
-import Vuex from 'vuex';
-Vue.use(Vuex);
+import Vue from 'vue'
+import Vuex from 'vuex'
+import cart from './cart'
+import products from './products'
+
+Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-    getProductsList(ctx, data) {
-      return api.getProductsList();
-    },
-  },
   modules: {
+    products,
+    cart
   }
 })

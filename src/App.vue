@@ -1,21 +1,20 @@
 <template>
   <div id="app">
-    <Header :cart="cart" :currency="currency"></Header>
+    <Header :currency="currency"/>
     <List :currency="currency"/>
-    <Cart :cart="cart"/>
+    <Cart :currency="currency"/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import List from './components/List.vue';
-import Cart from './components/Cart.vue';
+import Cart from './components/Cart.vue'
+import Header from './components/Header.vue'
+import List from './components/List.vue'
 
 export default {
   name: 'App',
   data() {
     return {
-      cart: [],
       currency: 'VGTB',
     };
   },
