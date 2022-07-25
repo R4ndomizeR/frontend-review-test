@@ -2,6 +2,14 @@
 export default {
   name: 'Header',
   props: {
+    // неверная структура определения пропа
+    // правильный вариант:
+    // cart: {
+    //   type: Array,
+    //   required: true,
+    //   default: []
+    // },
+
     cart: Array,
     required: true,
     default: {},
@@ -14,6 +22,8 @@ export default {
     };
   },
   watch: {
+    // вынести подсчет общей стоимости в computed метод, не используя watch,
+    // вычисляемые свойства оптимальнее, т.к. они кэшируются
     cart(cart) {
       let val = 0;
       cart.forEach((item) => {

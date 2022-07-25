@@ -7,14 +7,19 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import List from './components/List.vue';
-import Cart from './components/Cart.vue';
+import Cart from './components/Cart.vue'
+import Header from './components/Header.vue'
+import List from './components/List.vue'
 
 export default {
   name: 'App',
   data() {
     return {
+      // Можно вынести состояние корзины и валюты во vuex
+      // и получать доступ в дочерних компонентах уже через хранилище, а не через props,
+      // чтобы вынести повторяющуюся логику управления состоянием и само состояние в одно место.
+      // Либо использовать provide, inject
+      // Такой подход удобен при глубокой вложенности компонентов.
       cart: [],
       currency: 'VGTB',
     };

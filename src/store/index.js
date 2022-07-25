@@ -1,6 +1,6 @@
-import api from '../../api/products.js';
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import api from '../../api/products.js'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,5 +14,6 @@ export default new Vuex.Store({
     },
   },
   modules: {
+    // для удобного структурирования - вынести состояние сущностей в отдельные модули cart.js, products.js
   }
 })
