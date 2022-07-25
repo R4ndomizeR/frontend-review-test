@@ -5,15 +5,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Header',
-  props: {
-    currency: String,
-  },
   computed: {
-    cartPrice() {
-      return this.$store.getters.cartPrice
-    },
+    ...mapGetters(['cartPrice', 'currency'])
   },
 }
 </script>

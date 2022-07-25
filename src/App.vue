@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header :currency="currency"/>
-    <List :currency="currency"/>
-    <Cart :currency="currency"/>
+    <Header />
+    <List />
+    <Cart />
   </div>
 </template>
 
@@ -13,11 +13,6 @@ import List from './components/List.vue'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      currency: 'VGTB',
-    };
-  },
   components: {
     Header,
     List,

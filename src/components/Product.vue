@@ -49,8 +49,8 @@ export default {
     display: inline-block;
     /* width: 100%; */
 
-    /* flex-grow: 1; */
-    /* flex-basis: 33%; */
+    flex-grow: 1;
+    flex-basis: 33%;
 
     border: 1px solid #908888;
     border-radius: 5px;
@@ -58,18 +58,18 @@ export default {
     padding: 10px;
   }
 
-  /* @media (min-width: 420px) and (max-width: 840px) {
-      .card {
-        flex-grow: 0;
-        flex-basis: 50%;
-      }
+  @media (min-width: 420px) and (max-width: 840px) {
+    .card {
+      flex-grow: 0;
+      flex-basis: 50%;
     }
+  }
 
-    @media (max-width: 420px) {
-      .card {
-        flex-basis: 100%;
-      }
-    } */
+  @media (max-width: 420px) {
+    .card {
+      flex-basis: 100%;
+    }
+  }
 
   .card-image {
     width: 100%;
